@@ -3,13 +3,11 @@
 namespace App\Repository;
 
 use App\Repository\RepositoryInterface;
-use App\Models\Admin;
 use App\Models\Member;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
 class AuthRepository extends BaseRepository implements RepositoryInterface

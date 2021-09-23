@@ -21,7 +21,6 @@ Route::prefix('v1')->group(function () {
         Route::post('login', [AuthController::class, 'adminLogin']);
 
         Route::middleware(['auth:admin-api'])->group(function () {
-            Route::resource('product', ProductController::class);
             Route::post('logout', [AuthController::class, 'adminLogout']);
         });
     });
@@ -31,7 +30,6 @@ Route::prefix('v1')->group(function () {
         Route::post('register', [AuthController::class, 'memberRegister']);
         Route::middleware(['auth:member-api'])->group(function () {
             Route::post('logout', [AuthController::class, 'memberlogout']);
-            Route::get('get-products', [ProductController::class, 'getProducts']);
         });
     });
 });
