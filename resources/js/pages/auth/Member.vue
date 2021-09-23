@@ -27,12 +27,7 @@
             </div>
           </div>
           <div v-if="login">
-            <form
-              action="#"
-              @submit.prevent="handleSubmit"
-              class="needs-validation"
-              novalidate=""
-            >
+            <form @submit.prevent="handleSubmit" novalidate="">
               <div class="form-group">
                 <label for="username">Username</label>
                 <input
@@ -44,7 +39,11 @@
                   required
                   autofocus
                 />
-                <div class="invalid-feedback">Username harus diisi!</div>
+                <small
+                  class="text-danger"
+                  v-if="errors && errors.username[0]"
+                  >{{ errors.username[0] }}</small
+                >
               </div>
 
               <div class="form-group">
@@ -59,7 +58,11 @@
                   tabindex="2"
                   required
                 />
-                <div class="invalid-feedback">Password harus diisi!</div>
+                <small
+                  class="text-danger"
+                  v-if="errors && errors.password[0]"
+                  >{{ errors.password[0] }}</small
+                >
               </div>
 
               <div class="form-group text-left">
@@ -95,7 +98,7 @@
                   required
                   autofocus
                 />
-                <div class="invalid-feedback">Username harus diisi!</div>
+                <small class="text-danger">Username harus diisi!</small>
               </div>
 
               <div class="form-group">
@@ -110,7 +113,7 @@
                   tabindex="2"
                   required
                 />
-                <div class="invalid-feedback">Password harus diisi!</div>
+                <small class="text-danger">Password harus diisi!</small>
               </div>
               <div class="form-group">
                 <div class="d-block">
@@ -126,7 +129,7 @@
                   tabindex="2"
                   required
                 />
-                <div class="invalid-feedback">Password harus diisi!</div>
+                <small class="text-danger">Password harus diisi!</small>
               </div>
 
               <div class="form-group text-left">
@@ -184,12 +187,26 @@ export default {
       password_confirmation: null,
     },
     login: true,
+    errors: null,
   }),
   methods: {
     async handleSubmit() {
       try {
+        this.errors = null;
         if (this.login) {
-          console.log(this.item);
+          const response = await this.$store
+            .dispatch("auth/memberLogin", this.item)
+            .then((response) => {
+              //   console.log(response);
+              //   this.$router.push({ name: "Home" });
+            })
+            .catch((error) => {
+              if (Array.isArray(error.response.data.error)) {
+                console.log("Username");
+              } else {
+                this.errors = error.response.data.errors;
+              }
+            });
         } else {
           console.log("register");
         }

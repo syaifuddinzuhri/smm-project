@@ -32,12 +32,12 @@ class AuthRepository extends BaseRepository implements RepositoryInterface
                         'user' => $user,
                         'token' => $user->createToken($user->id . '-' . $user->username)->accessToken
                     ];
-                    return $this->okApiResponse($data);
+                    return $this->okApiResponse('OK', $data);
                 } else {
-                    return $this->unauthorizedApiResponse($request->all(), 'Username atau password salah!');
+                    return $this->unauthorizedApiResponse('Username atau password salah!');
                 }
             } else {
-                return $this->unauthorizedApiResponse($request->all(), 'Username atau password salah!');
+                return $this->unauthorizedApiResponse('Username atau password salah!');
             }
         } catch (QueryException $q) {
             return $this->badRequestApiResponse($q->error);
@@ -54,12 +54,12 @@ class AuthRepository extends BaseRepository implements RepositoryInterface
                         'user' => $user,
                         'token' => $user->createToken($user->id . '-' . $user->username)->accessToken
                     ];
-                    return $this->okApiResponse($data);
+                    return $this->okApiResponse('OK', $data);
                 } else {
-                    return $this->unauthorizedApiResponse($request->all(), 'Username atau password salah!');
+                    return $this->unauthorizedApiResponse('Username atau password salah!');
                 }
             } else {
-                return $this->unauthorizedApiResponse($request->all(), 'Username atau password salah!');
+                return $this->unauthorizedApiResponse('Username atau password salah!');
             }
         } catch (QueryException $q) {
             return $this->badRequestApiResponse($q->error);
@@ -70,7 +70,7 @@ class AuthRepository extends BaseRepository implements RepositoryInterface
     {
         try {
             $this->modelMember->create($request->all());
-            return $this->okApiResponse($request->all(), 'Register berhasil');
+            return $this->okApiResponse('Register berhasil');
         } catch (QueryException $q) {
             return $this->badRequestApiResponse($q->error);
         }
@@ -82,7 +82,7 @@ class AuthRepository extends BaseRepository implements RepositoryInterface
             Auth::guard('admin-api')->user()->tokens->each(function ($token, $key) {
                 $token->delete();
             });
-            return $this->okApiResponse([], 'Logout berhasil');
+            return $this->okApiResponse('Logout berhasil');
         } catch (QueryException $q) {
             return $this->badRequestApiResponse($q->error);
         }
@@ -94,7 +94,7 @@ class AuthRepository extends BaseRepository implements RepositoryInterface
             Auth::guard('member-api')->user()->tokens->each(function ($token, $key) {
                 $token->delete();
             });
-            return $this->okApiResponse([], 'Logout berhasil');
+            return $this->okApiResponse('Logout berhasil');
         } catch (QueryException $q) {
             return $this->badRequestApiResponse($q->error);
         }

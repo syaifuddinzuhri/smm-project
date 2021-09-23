@@ -34,7 +34,8 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function successApiResponse(array $data, int $statusCode = Response::HTTP_OK, string $message = ''): JsonResponse
+
+    public function successApiResponse(array $data = [], int $statusCode = Response::HTTP_OK, string $message = ''): JsonResponse
     {
         $response = $this->prepareApiResponse($message, $statusCode);
         $response['data'] = $data;
@@ -65,7 +66,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function okApiResponse(array $data, string $message = ''): JsonResponse
+    public function okApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->successApiResponse($data, Response::HTTP_OK, $message);
     }
@@ -77,7 +78,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function createdApiResponse(array $data, string $message = ''): JsonResponse
+    public function createdApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->successApiResponse($data, Response::HTTP_CREATED, $message);
     }
@@ -89,7 +90,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function badRequestApiResponse(array $data, string $message = ''): JsonResponse
+    public function badRequestApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->errorApiResponse($data, Response::HTTP_BAD_REQUEST, $message);
     }
@@ -101,7 +102,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function unauthorizedApiResponse(array $data, string $message = ''): JsonResponse
+    public function unauthorizedApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->errorApiResponse($data, Response::HTTP_UNAUTHORIZED, $message);
     }
@@ -113,7 +114,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function forbiddenApiResponse(array $data, string $message = ''): JsonResponse
+    public function forbiddenApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->errorApiResponse($data, Response::HTTP_FORBIDDEN, $message);
     }
@@ -125,7 +126,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function notFoundApiResponse(array $data, string $message = ''): JsonResponse
+    public function notFoundApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->errorApiResponse($data, Response::HTTP_NOT_FOUND, $message);
     }
@@ -137,7 +138,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function conflictApiResponse(array $data, string $message = ''): JsonResponse
+    public function conflictApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->errorApiResponse($data, Response::HTTP_CONFLICT, $message);
     }
@@ -149,7 +150,7 @@ trait ApiResponse
      * @param  string  $message
      * @return JsonResponse
      */
-    public function unprocessableApiResponse(array $data, string $message = ''): JsonResponse
+    public function unprocessableApiResponse(string $message = '', array $data = []): JsonResponse
     {
         return $this->errorApiResponse($data, Response::HTTP_UNPROCESSABLE_ENTITY, $message);
     }
