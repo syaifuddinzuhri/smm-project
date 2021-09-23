@@ -7,22 +7,76 @@
         <div class="p-4 m-3">
           <div class="row mb-5">
             <div class="col-12 text-center">
-             <h1>SOCIAL MEDIA MANAGEMENT</h1>
+              <h1>SOCIAL MEDIA MANAGEMENT</h1>
               <div class="d-flex justify-content-center mt-4">
                 <button
                   class="btn"
-                  v-bind:class="{'btn-danger': login}"
+                  v-bind:class="{ 'btn-danger': login }"
                   v-on:click="login = !login"
                 >
                   Login
                 </button>
-                <button class="btn"  v-bind:class="{'btn-danger': !login}" v-on:click="login = !login">
+                <button
+                  class="btn"
+                  v-bind:class="{ 'btn-danger': !login }"
+                  v-on:click="login = !login"
+                >
                   Register
                 </button>
               </div>
             </div>
           </div>
           <div v-if="login">
+            <form
+              action="#"
+              @submit.prevent="handleSubmit"
+              class="needs-validation"
+              novalidate=""
+            >
+              <div class="form-group">
+                <label for="email">Username</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  v-model="item.username"
+                  tabindex="1"
+                  required
+                  autofocus
+                />
+                <div class="invalid-feedback">Username harus diisi!</div>
+              </div>
+
+              <div class="form-group">
+                <div class="d-block">
+                  <label for="password" class="control-label">Password</label>
+                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  name="password"
+                  v-model="item.password"
+                  tabindex="2"
+                  required
+                />
+                <div class="invalid-feedback">Password harus diisi!</div>
+              </div>
+
+              <div class="form-group text-left">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-lg btn-icon icon-right"
+                  tabindex="4"
+                >
+                  Login
+                </button>
+              </div>
+              <div class="mt-5 text-center">
+                Login sebagai <router-link to="/auth/admin">Admin</router-link>
+              </div>
+            </form>
+          </div>
+          <div v-else>
             <form
               method="POST"
               action="#"
@@ -55,57 +109,11 @@
                 />
                 <div class="invalid-feedback">Password harus diisi!</div>
               </div>
-
-              <div class="form-group text-left">
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-lg btn-icon icon-right"
-                  tabindex="4"
-                >
-                  Login
-                </button>
-              </div>
-               <div class="mt-5 text-center">
-                Login sebagai <router-link to="/auth/admin">Admin</router-link>
-                </div>
-            </form>
-          </div>
-          <div v-else>
-           <form
-              method="POST"
-              action="#"
-              class="needs-validation"
-              novalidate=""
-            >
-              <div class="form-group">
-                <label for="email">Username</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  name="email"
-                  tabindex="1"
-                  required
-                  autofocus
-                />
-                <div class="invalid-feedback">Username harus diisi!</div>
-              </div>
-
               <div class="form-group">
                 <div class="d-block">
-                  <label for="password" class="control-label">Password</label>
-                </div>
-                <input
-                  type="password"
-                  class="form-control"
-                  name="password"
-                  tabindex="2"
-                  required
-                />
-                <div class="invalid-feedback">Password harus diisi!</div>
-              </div>
-              <div class="form-group">
-                <div class="d-block">
-                  <label for="password" class="control-label">Konfirmasi Password</label>
+                  <label for="password" class="control-label"
+                    >Konfirmasi Password</label
+                  >
                 </div>
                 <input
                   type="password"
@@ -165,10 +173,21 @@
 
 <script>
 export default {
-  data() {
-    return {
-      login: true,
-    };
+  data: () => ({
+    item: {
+      username: null,
+      password: null,
+    },
+    login: true,
+  }),
+  methods: {
+    async handleSubmit() {
+      try {
+        console.log(this.item);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

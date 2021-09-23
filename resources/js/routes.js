@@ -1,3 +1,4 @@
+import Middleware from './middlewares/index'
 import Home from './pages/Home.vue'
 import Member from './pages/Member.vue'
 import Riwayat from './pages/Riwayat.vue'
@@ -12,6 +13,7 @@ export const routes = [
         path: '/auth/member',
         component: LoginMember,
         meta: {
+            mmiddlewares: [Middleware.guest],
             loginLayout: true,
         }
     },
@@ -20,6 +22,7 @@ export const routes = [
         path: '/auth/admin',
         component: Admin,
         meta: {
+            mmiddlewares: [Middleware.guest],
             loginLayout: true,
         },
     },
@@ -27,29 +30,38 @@ export const routes = [
         name: 'home',
         path: '/',
         component: Home,
-        // beforeEnter: (to, from, next) => {
-        //     next({name: 'auth-user'})
-        // }
+        meta: {
+            mmiddlewares: [Middleware.auth],
+        }
     },
     {
         name: 'member',
         path: '/member',
-        component: Member
+        component: Member,
+        meta: {
+            mmiddlewares: [Middleware.auth],
+        }
     },
     {
         name: 'produk',
         path: '/produk',
-        component: Produk
+        component: Produk,
+        meta: {
+            mmiddlewares: [Middleware.auth],
+        }
     },
     {
         name: 'riwayat-transaksi',
         path: '/riwayat-transaksi',
-        component: Riwayat
+        component: Riwayat,
+        meta: {
+            mmiddlewares: [Middleware.auth],
+        }
     },
     {
         path: "*",
         component: PageNotFound,
-         meta: {
+        meta: {
             Error404: true,
         },
     }

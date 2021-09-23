@@ -1,36 +1,21 @@
 require('./bootstrap');
 
 import Vue from 'vue/dist/vue';
-window.Vue = require('vue');
-
 import App from './App.vue';
-import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-import {routes} from './routes';
+import router from './router';
+import store from './store'
 
-Vue.use(VueRouter);
+axios.defaults.baseURL = 'http://localhost:8000/api/v1/'
+
+window.Vue = require('vue');
 Vue.use(VueAxios, axios);
-
-const router = new VueRouter({
-    mode: 'history',
-    routes: routes
-});
-
-
-// router.beforeEach((to, from, next) => {
-//     const isLoggedIn = false;
-//     if (isLoggedIn == false) {
-//         //   sessionStorage.setItem('redirectPath', to.path);
-//         next({name: 'auth-member'});
-//     } else {
-//         next();
-//     }
-// });
 
 const app = new Vue({
     el: '#app',
-    router: router,
+    router,
+    store,
     linkActiveClass: "active",
     linkExactActiveClass: "exact-active",
     render: h => h(App),
