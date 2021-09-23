@@ -34,11 +34,11 @@
               novalidate=""
             >
               <div class="form-group">
-                <label for="email">Username</label>
+                <label for="username">Username</label>
                 <input
-                  type="email"
+                  type="username"
                   class="form-control"
-                  name="email"
+                  name="username"
                   v-model="item.username"
                   tabindex="1"
                   required
@@ -80,15 +80,17 @@
             <form
               method="POST"
               action="#"
+              @submit.prevent="handleSubmit"
               class="needs-validation"
               novalidate=""
             >
               <div class="form-group">
-                <label for="email">Username</label>
+                <label for="username">Username</label>
                 <input
-                  type="email"
+                  type="username"
                   class="form-control"
-                  name="email"
+                  name="username"
+                  v-model="item.username"
                   tabindex="1"
                   required
                   autofocus
@@ -103,6 +105,7 @@
                 <input
                   type="password"
                   class="form-control"
+                  v-model="item.password"
                   name="password"
                   tabindex="2"
                   required
@@ -118,7 +121,8 @@
                 <input
                   type="password"
                   class="form-control"
-                  name="password"
+                  name="password_confirmation"
+                  v-model="item.password_confirmation"
                   tabindex="2"
                   required
                 />
@@ -177,13 +181,18 @@ export default {
     item: {
       username: null,
       password: null,
+      password_confirmation: null,
     },
     login: true,
   }),
   methods: {
     async handleSubmit() {
       try {
-        console.log(this.item);
+        if (this.login) {
+          console.log(this.item);
+        } else {
+          console.log("register");
+        }
       } catch (error) {
         console.log(error);
       }

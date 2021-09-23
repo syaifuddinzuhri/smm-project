@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="$route.meta.loginLayout || $route.meta.Error404">
-        <router-view></router-view>
+      <router-view></router-view>
     </div>
     <div class="main-wrapper" v-else>
       <navbar></navbar>

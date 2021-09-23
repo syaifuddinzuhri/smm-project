@@ -1,4 +1,3 @@
-import Middleware from './middlewares/index'
 import Home from './pages/Home.vue'
 import Member from './pages/Member.vue'
 import Riwayat from './pages/Riwayat.vue'
@@ -6,6 +5,7 @@ import Produk from './pages/Produk.vue'
 import PageNotFound from './pages/PageNotFound.vue'
 import LoginMember from './pages/auth/Member.vue'
 import Admin from './pages/auth/Admin.vue'
+import Middleware from './middlewares/index'
 
 export const routes = [
     {
