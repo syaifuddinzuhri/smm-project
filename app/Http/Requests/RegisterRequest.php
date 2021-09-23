@@ -38,7 +38,7 @@ class RegisterRequest extends FormRequest
             'password.required'                 => 'Password tidak boleh kosong!',
             'password.confirmed'                => 'Password tidak sama!',
             'password.min'                      => 'Password minimal 6 karakter!',
-            'password_confirmation.required'    => 'Konfirmasi password tidak boleh kosong!',
+            'password_confirmation.required'    => 'Konfirmasi password tidak boleh kosong.!',
             'password_confirmation.min'         => 'Konfirmasi password minimal 6 karakter!',
         ];
     }
