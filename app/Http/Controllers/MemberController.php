@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\HistoryOrderRequest;
-use App\Repository\HistoryOrderRepository;
+use App\Http\Requests\ProductRequest;
+use App\Repository\ProductRepository;
 
-class HistoryOrderController extends Controller
+class MemberController extends Controller
 {
-    private $historyOrderRepository;
+    private $memberRepository;
 
-    public function __construct(HistoryOrderRepository $historyOrderRepository){
-        $this->historyOrderRepository = $historyOrderRepository;
+    public function __construct(MemberRepository $memberRepository){
+        $this->memberRepository = $memberRepository;
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +20,17 @@ class HistoryOrderController extends Controller
      */
     public function index()
     {
-        return $this->historyOrderRepository->index();
+        return $this->memberRepository->index();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -31,7 +41,7 @@ class HistoryOrderController extends Controller
      */
     public function store(Request $request)
     {
-        return $this->historyOrderRepository->store($request);
+        //
     }
 
     /**
@@ -46,6 +56,17 @@ class HistoryOrderController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -54,7 +75,7 @@ class HistoryOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->memberRepository->updateMember();
     }
 
     /**
@@ -66,11 +87,5 @@ class HistoryOrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function getAllOrderByIdMember()
-    {
-        return $this->historyOrderRepository->getAllOrderByIdMember();
     }
 }
