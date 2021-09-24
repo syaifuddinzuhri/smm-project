@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HistoryOrderController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,9 @@ Route::prefix('v1')->group(function () {
         Route::post('login', [AuthController::class, 'adminLogin']);
 
         Route::middleware(['auth:admin-api'])->group(function () {
+            Route::resource('/products', ProductController::class);
+            Route::resource('/members', MemberController::class);
+            Route::resource('/orders', HistoryOrderController::class);
             Route::post('logout', [AuthController::class, 'adminLogout']);
         });
     });
@@ -30,6 +35,9 @@ Route::prefix('v1')->group(function () {
         Route::post('register', [AuthController::class, 'memberRegister']);
         Route::middleware(['auth:member-api'])->group(function () {
             Route::post('logout', [AuthController::class, 'memberlogout']);
+            Route::resource('/products', ProductController::class);
+            Route::resource('/orders', OrderController::class);
+            Route::get('get-all-order-by-id-member'. [HistoryOrderController::class, 'getAllOrderByIdMember']);
         });
     });
 });
